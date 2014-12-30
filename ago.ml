@@ -314,6 +314,7 @@ let string_of_date = function Date(yy, mm, dd) ->
     
 (** Difference between two dates in days *)
 let diff d1 d2 = (days_since_1900 d1) - (days_since_1900 d2)
+
 let print d1 d2 =
     Printf.printf "%s - %s = %+4d\n" 
         (string_of_date d1)
@@ -327,23 +328,44 @@ let test () =
         let dy = date_from_string date_y in
             diff dy dx = days
     in
-        List.for_all check testcases
+        if List.for_all check testcases
+        then Printf.printf "%d tests passed\n" (List.length testcases)
+        else 
+            begin 
+                Printf.printf "Test failed!\n"; 
+                assert false
+            end
 
-let rec process = function
-    | dx :: dy :: ds -> print dx dy; process (dy :: ds)
-    | dx :: []       -> print dx now
-    | []             -> ()
+let datediff x y = Printf.printf "%d\n" (diff x y)
+
+let usage this io =
+    List.iter (fun s -> output_string io s; output_string io "\n")
+    [ "usage: "^this^" yyyy-mm-dd [yyyy-mm-dd]"
+    ; ""
+    ; "computes the number of days between two dates or the given date"
+    ; "and the current date. The difference is computed as first"
+    ; "minus second date."
+    ; ""
+    ; "Dates can be given in a variety of formats:"
+    ; "yyyy-mm-dd"
+    ; "dd.mm.yyyy"
+    ; "today" 
+    ; "now"
+    ]
 
 (** [main] handldes command line arguments. *)
 let main () =
     let argv    = Array.to_list Sys.argv            in
-    (* let this    = List.hd argv |> Filename.basename in
-     *)
-    let dates   = List.tl argv |>  List.map date_from_string in
-        begin
-            assert (test ());
-            process dates
-        end    
+    let args    = List.tl argv                      in
+    let this    = List.hd argv |> Filename.basename in
+        match args with
+        | "-test"   :: _    -> test ()
+        | "-h"      :: _    -> usage this stdout
+        | "-help"   :: _    -> usage this stdout
+        | [x]               -> datediff (date_from_string x) now
+        | [x; y]            -> datediff (date_from_string x)
+                                        (date_from_string y)
+        | _                 -> usage this stderr; exit 0
 
 let () = if not !Sys.interactive then begin main (); exit 0 end
         
