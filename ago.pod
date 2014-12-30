@@ -31,9 +31,13 @@ A date can be given in the following formats:
 
 Day and month must be designated by two digits.
 
-=item I<dd.mm.yyyy> as in C<28.12.2014> and C<3.1.2010>
+=item I<dd.mm.yyyy> as in C<28.12.2014> or C<3.1.2010>
 
 Day and month may be designate by one or two digits.
+
+=item C<today> or C<now>.
+
+This designates the current local date.
 
 =back
 

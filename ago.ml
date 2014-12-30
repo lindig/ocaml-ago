@@ -304,7 +304,9 @@ let now =
     - the date is illegal
     - the date is possibly legal can't be handled *)
 let date_from_string str =
-    let (yy, mm, dd) = Agolex.from_string str in
+    let (yy, mm, dd) = 
+        try Agolex.from_string str 
+        with Agolex.Error msg -> error "Format error: %s" msg in
     let d = Date(yy, mm, dd) in
         if is_legal d then d else error "not a legal date: %s" str
 
@@ -367,5 +369,9 @@ let main () =
                                         (date_from_string y)
         | _                 -> usage this stderr; exit 0
 
-let () = if not !Sys.interactive then begin main (); exit 0 end
+let () = if not !Sys.interactive then 
+    begin 
+        main (); 
+        exit 0 
+    end
         
