@@ -2,7 +2,7 @@
 # README
 
 Ago is a small command line utility to compute the number of days between
-two calendar dates. If just one date os given, the current date is assumed
+two calendar dates. If just one date is given, the current date is assumed
 for the second one.
 
     $ ago 2014-12-10 

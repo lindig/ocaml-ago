@@ -36,13 +36,22 @@ ago.1:		ago.pod Makefile
 
 # OPAM - the targets below help to publish this code via opam.ocaml.org
 
-VERSION =	v0.1
+VERSION =	0.1
+TAG =		v$(VERSION)
 GITHUB =	https://github.com/lindig/ocaml-ago
-ZIP =		$(GITHUB)/archive/$(VERSION).zip
+ZIP =		$(GITHUB)/archive/$(TAG).zip
+OPAM =		$(HOME)/Development/opam-repository/packages/ago/ago.$(VERSION)
 
 url:		FORCE
 		echo	"archive: \"$(ZIP)\"" > url
 		echo	"checksum: \"`curl -L $(ZIP)| md5 -q`\"" >> url
+
+release:	url opam descr
+		test -d "$(OAPM)" || mkdir -p $(OPAM)
+		cp opam url descr $(OPAM)
+
+
+
 
 # pseudo target
 
