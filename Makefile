@@ -2,15 +2,15 @@
 #
 #
 
-PREFIX =    $(HOME)
-BINDIR =    $(PREFIX)/bin
-MANDIR =    $(PREFIX)/man/man1
+PREFIX =	$(HOME)
+BINDIR =	$(PREFIX)/bin
+MANDIR =	$(PREFIX)/man/man1
 
-P2M_OPTS =  -s 1 -r "Alpha" -c "opam.ocaml.org"
+P2M_OPTS =	-s 1 -r "Alpha" -c "opam.ocaml.org"
 
-OCB =       ocamlbuild
+OCB =		ocamlbuild
 
-all:        ago.native ago.1
+all:		ago.native ago.1
 
 ago.native:	FORCE
 		$(OCB) -libs unix ago.native
@@ -18,6 +18,7 @@ ago.native:	FORCE
 clean:		FORCE
 		$(OCB) -clean
 		rm -f ago.1
+		rm -f url
 
 install:	ago.1 ago.native
 		install -d $(BINDIR)
@@ -32,5 +33,17 @@ remove:		FORCE
 
 ago.1:		ago.pod Makefile
 		pod2man $(P2M_OPTS) $< > $@
+
+# OPAM - the targets below help to publish this code via opam.ocaml.org
+
+VERSION =	v0.1
+GITHUB =	https://github.com/lindig/ocaml-ago
+ZIP =		$(GITHUB)/archive/$(VERSION).zip
+
+url:		FORCE
+		echo	"archive: \"$(ZIP)\"" > url
+		echo	"checksum: \"`curl -L $(ZIP)| md5 -q`\"" >> url
+
+# pseudo target
 
 FORCE:;
