@@ -1,5 +1,16 @@
 (**
-    Compute the number of days between two dates.
+    A command line tool that computes the number of days between two
+    calendar dates: 
+
+    $ ago 2010-06-01 2014-10-01
+    -1583
+
+    $ ago 2014-01-20
+    -346
+
+    This code does not rely on external libraries but I'm aware that there
+    is a comprehensive calendar libray. I wanted this to be free of
+    external dependencies as my first foray into Opam.
 
     New BSD License, see LICENSE.md.
     Copyright (c) 2015, Christian Lindig <lindig@gmail.com>
