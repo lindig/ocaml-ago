@@ -50,7 +50,7 @@ url:		FORCE
 		echo	"checksum: \"`curl -L $(ZIP)| md5 -q`\"" >> url
 
 release:	url opam descr
-		test -d "$(OAPM)" || mkdir -p $(OPAM)
+		test -d "$(OPAM)" || mkdir -p $(OPAM)
 		cp opam url descr $(OPAM)
 
 
