@@ -16,10 +16,12 @@ B<ago> I<yyyy-mm-dd> [I<yyyy-mm-dd>]
 =head1 DESCRIPTION
 
 B<ago> computes the difference in days between two calendar dates provided
-as arguments. If just one date is given, the the current date is taken as
-the second one.
+as arguments. If just one date is given, the current date is taken as the
+second one.  B<ago> emits the result to standard output.
 
-B<ago> emits the result to I<stdout>.
+The difference in days is negative if the fist date is before the second
+date (or the current date, if no second date is given). Conversely, if the
+first date is after the second, the difference is positive.
 
 =head1 DATE FORMAT
 
@@ -57,10 +59,10 @@ date(1)
 =head1 AUTHOR
 
 Christian Lindig <lindig@gmail.com>. The source code is
-available from http://github.com/lindig.
+available from L<http://github.com/lindig/ocaml-ago>.
 
 =head1 LICENSE
 
-The source code of this program is licensed under the BSD-2 Open Source
-Lincense.
+This program is licensed under the BSD-2 Open Source
+License.
 
