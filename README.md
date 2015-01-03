@@ -14,12 +14,12 @@ for the second one.
 # Installation
 
 I recommend to compile and install ago via Opam, the OCaml packaging
-managerr:
+manager:
 
     opam install ago
 
 This installs a binary and a manual page which you can read as usual with
-`man ago`.  Please note that the version on Opam might be slighlty behind
+`man ago`.  Please note that the version on Opam might be slightly behind
 this repository.
 
 # Building
