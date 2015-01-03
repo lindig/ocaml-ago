@@ -11,8 +11,18 @@ for the second one.
     $ ago 2014-10-11 2014-12-04
     -54
     
+# Installation
 
-# BUILDING
+I recommend to compile and install ago via Opam, the OCaml packaging
+managerr:
+
+    opam install ago
+
+This installs a binary and a manual page which you can read as usual with
+`man ago`.  Please note that the version on Opam might be slighlty behind
+this repository.
+
+# Building
 
 Ago is implemented in  OCaml. It does not rely on libraries outside
 of the standard library and was developed with OCaml 4.02.1.
@@ -20,18 +30,26 @@ of the standard library and was developed with OCaml 4.02.1.
     make
     make PREFIX=/usr/local install
 
-# DOCUMENTATION
+# Documentation
 
 The ago utility comes with a Unix manual part which is installed by the
 install target. It is build from ago.pod in the repository.
 
-# LICENSE
+# License
 
 BSD Licencse. See [LICENSE.md](LICENSE.md).
 
-# AUTHOR
+# Author
 
 Christian Lindig <lindig@gmail.com>
+
+# Opam Description
+
+ago - compute number of days between two calendar dates
+
+Ago computes the difference in days between two calendar dates provided
+as arguments. If just one date is given, the current date is taken as
+the second one.
 
 
 

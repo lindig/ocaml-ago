@@ -18,7 +18,7 @@ ago.native:	FORCE
 clean:		FORCE
 		$(OCB) -clean
 		rm -f ago.1
-		rm -f url
+		rm -f url descr
 
 install:	ago.1 ago.native
 		install -d $(BINDIR)
@@ -41,6 +41,9 @@ TAG =		v$(VERSION)
 GITHUB =	https://github.com/lindig/ocaml-ago
 ZIP =		$(GITHUB)/archive/$(TAG).zip
 OPAM =		$(HOME)/Development/opam-repository/packages/ago/ago.$(VERSION)
+
+descr:		README.md
+		sed -n '/^# Opam/,$$ { /^#/n; p;}' $< >$@
 
 url:		FORCE
 		echo	"archive: \"$(ZIP)\"" > url
