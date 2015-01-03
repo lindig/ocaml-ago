@@ -36,7 +36,7 @@ ago.1:		ago.pod Makefile
 
 # OPAM - the targets below help to publish this code via opam.ocaml.org
 
-VERSION =	0.1
+VERSION =	0.2
 TAG =		v$(VERSION)
 GITHUB =	https://github.com/lindig/ocaml-ago
 ZIP =		$(GITHUB)/archive/$(TAG).zip

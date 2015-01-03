@@ -33,11 +33,11 @@ of the standard library and was developed with OCaml 4.02.1.
 # Documentation
 
 The ago utility comes with a Unix manual part which is installed by the
-install target. It is build from ago.pod in the repository.
+install target. It is built from ago.pod in the repository.
 
 # License
 
-BSD Licencse. See [LICENSE.md](LICENSE.md).
+BSD License. See [LICENSE.md](LICENSE.md).
 
 # Author
 
