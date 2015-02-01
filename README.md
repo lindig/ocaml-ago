@@ -45,7 +45,7 @@ Christian Lindig <lindig@gmail.com>
 
 # Opam Description
 
-ago - compute number of days between two calendar dates
+ago(1) - compute the number of days between two calendar dates
 
 Ago computes the difference in days between two calendar dates provided
 as arguments. If just one date is given, the current date is taken as
