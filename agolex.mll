@@ -39,8 +39,8 @@ rule date = parse
     (month  as mm) '.'
     (year   as yy) eof      { (int_of yy, int_of mm, int_of dd) }
 
-|   "now"                   { now }
-|   "today"                 { now }
+|   "now"   eof             { now }
+|   "today" eof             { now }
 
 {
 let from_string str =

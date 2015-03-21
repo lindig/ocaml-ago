@@ -34,6 +34,9 @@ remove:		FORCE
 ago.1:		ago.pod Makefile
 		pod2man $(P2M_OPTS) $< > $@
 
+test:		ago.native
+		./ago.native -test
+
 # OPAM - the targets below help to publish this code via opam.ocaml.org
 
 VERSION =	0.2
