@@ -1,5 +1,5 @@
 (** This module uses regular expressions to scan calendar dates. A more
-    concentionmal choice would have been to use a regular expression
+    conventionmal choice would have been to use a regular expression
     library like Re.
 
     Copyright (c) 2015, Christian Lindig <lindig@gmail.com>
