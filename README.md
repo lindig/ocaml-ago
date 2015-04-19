@@ -44,7 +44,6 @@ BSD License. See [LICENSE.md](LICENSE.md).
 Christian Lindig <lindig@gmail.com>
 
 # Opam Description
-
 ago(1) - compute the number of days between two calendar dates
 
 Ago computes the difference in days between two calendar dates provided
