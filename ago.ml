@@ -250,7 +250,7 @@ let days_in_month year month =
     - and can be handled by this program *)
 let is_legal = function Date(yy, mm, dd) ->
            1 <= mm && mm <= 12
-    &&     1 <= yy && yy <= 10000 (* probably larger *)
+    &&     1 <= yy && yy <= 9999 (* otherwise doesn't fit into yyyy-mm-dd *)
     &&     1 <= dd && dd <= days_in_month yy mm
 
 (* The following calculations are based on the following book: Nachum

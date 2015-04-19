@@ -19,7 +19,7 @@ B<ago> computes the difference in days between two calendar dates provided
 as arguments. If just one date is given, the current date is taken as the
 second one.  B<ago> emits the result to standard output.
 
-The difference in days is negative if the fist date is before the second
+The difference in days is negative if the first date is before the second
 date (or the current date, if no second date is given). Conversely, if the
 first date is after the second, the difference is positive.
 
@@ -50,7 +50,9 @@ messages are emitted to standard error.
 
 =head1 LIMITATIONS
 
-The year in a date must range between 1 and 10000. 
+The date must range between 0001-01-01 and 9999-12-31. The Gregorian
+calendar was introduced 1582 and hence dates prior to its introduction are
+are an extrapolation.
 
 =head1 SEE ALSO
 
