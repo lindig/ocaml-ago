@@ -39,7 +39,7 @@ test:		ago.native
 
 # OPAM - the targets below help to publish this code via opam.ocaml.org
 
-VERSION =	0.2
+VERSION =	0.3
 TAG =		v$(VERSION)
 GITHUB =	https://github.com/lindig/ocaml-ago
 ZIP =		$(GITHUB)/archive/$(TAG).zip
