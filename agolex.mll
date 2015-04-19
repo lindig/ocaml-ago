@@ -41,6 +41,7 @@ rule date = parse
 
 |   "now"   eof             { now }
 |   "today" eof             { now }
+|   "epoch" eof             { (1, 1, 1) }
 
 {
 let from_string str =

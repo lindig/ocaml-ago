@@ -41,6 +41,11 @@ Day and month may be designate by one or two digits.
 
 This designates the current local date.
 
+=item C<epoch>
+
+The C<epoch> designates January 1st, 1 (0001-01-01). This can be useful for
+enumerating dates.
+
 =back
 
 =head1 EXIT CODE AND DIAGNOSTICS
