@@ -50,7 +50,7 @@ messages are emitted to standard error.
 
 =head1 LIMITATIONS
 
-The year in a date must range between 1900 and 2099.
+The year in a date must range between 1 and 10000. 
 
 =head1 SEE ALSO
 

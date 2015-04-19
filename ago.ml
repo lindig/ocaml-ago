@@ -24,52 +24,6 @@ let error fmt = Printf.kprintf (fun msg -> raise (Error msg)) fmt
 (** Date in year, month 1..12, day 1..31 *)
 type date = Date of int * int * int (** use [is_legal] for invariants *)
 
-(** days in a month (0 .. 11) when not in a leap year, month is 0-based *)
-let days   = [| 31; 28; 31; 30;  31;  30;  31;  31;  30;  31;  30;  31|]
-let days'  = [|  0; 31; 59; 90; 120; 151; 181; 212; 243; 273; 304; 334|]
-(** days'.(i) is the number of days in a year before month i when not 
-    in a leap year; month is 0-based *)
-
-(*** code to compute days'
-let () =    
-    let days' = Array.make 12 0 in
-    let rec loop sum i =
-        if i >= 12 then () else
-            begin
-                Array.set days' i sum;
-                loop (sum+days.(i)) (i+1)
-            end                
-    in
-        loop 0 0
-***)
-
-(** [days_since_1900.(i) is the number of days between 1.1.1900 and
-    1.1.(1900+i). I'm planning to replace this by a function that
-    computes this. When I first wrote this code I had no access to the
-    internet to look up the date computation. *)
-
-let days_since_1900 = [|
-    0; 365; 730; 1095; 1460; 1826; 2191; 2556; 2921; 3287; 3652; 4017;
-    4382; 4748; 5113; 5478; 5843; 6209; 6574; 6939; 7304; 7670; 8035; 8400;
-    8765; 9131; 9496; 9861; 10226; 10592; 10957; 11322; 11687; 12053;
-    12418; 12783; 13148; 13514; 13879; 14244; 14609; 14975; 15340; 15705;
-    16070; 16436; 16801; 17166; 17531; 17897; 18262; 18627; 18992; 19358;
-    19723; 20088; 20453; 20819; 21184; 21549; 21914; 22280; 22645; 23010;
-    23375; 23741; 24106; 24471; 24836; 25202; 25567; 25932; 26297; 26663;
-    27028; 27393; 27758; 28124; 28489; 28854; 29219; 29585; 29950; 30315;
-    30680; 31046; 31411; 31776; 32141; 32507; 32872; 33237; 33602; 33968;
-    34333; 34698; 35063; 35429; 35794; 36159; 36524; 36890; 37255; 37620;
-    37985; 38351; 38716; 39081; 39446; 39812; 40177; 40542; 40907; 41273;
-    41638; 42003; 42368; 42734; 43099; 43464; 43829; 44195; 44560; 44925;
-    45290; 45656; 46021; 46386; 46751; 47117; 47482; 47847; 48212; 48578;
-    48943; 49308; 49673; 50039; 50404; 50769; 51134; 51500; 51865; 52230;
-    52595; 52961; 53326; 53691; 54056; 54422; 54787; 55152; 55517; 55883;
-    56248; 56613; 56978; 57344; 57709; 58074; 58439; 58805; 59170; 59535;
-    59900; 60266; 60631; 60996; 61361; 61727; 62092; 62457; 62822; 63188;
-    63553; 63918; 64283; 64649; 65014; 65379; 65744; 66110; 66475; 66840;
-    67205; 67571; 67936; 68301; 68666; 69032; 69397; 69762; 70127; 70493;
-    70858; 71223; 71588; 71954; 72319; 72684; 73049; |]
-
 (** Each testcase specifies two dates and the number of days between
     them. *)
 let testcases = [
@@ -274,36 +228,46 @@ let testcases = [
     ("2053-07-10", "2010-11-15", -15578);
     ("1982-01-22", "1955-02-23", -9830);
 ]
+(** days in a month (0 .. 11) when not in a leap year, month is 0-based *)
+let days   = [| 31; 28; 31; 30;  31;  30;  31;  31;  30;  31;  30;  31|]
 
-(** [is_leapyear] is true, if a year is a leap year *)
+(** [is_leapyear] is true, if and only if a year is a leap year *)
 let is_leapyear year =
         year mod 4    = 0
-    &&  year mod 100 != 0
-    ||  year mod 400  = 0
+    &&  year mod 400 != 100
+    &&  year mod 400 != 200
+    &&  year mod 400 != 300
 
 (** number of days in a month of a given year *)
-let days_in_month year month =
-    if is_leapyear year && month = 2 
-    then 29
-    else days.(month-1) (* array is zero-based, month is one-based *)
-
-(** [day_of_year] returns the zero-based day of the year. Hence,
-    1.1.2010 is day 0 in 2010 and 31.12.2010 is day 364 because 2010
-    is a not leap year *)
-let day_of_year = function Date(yy, mm, dd) ->
-    let leapday = if is_leapyear yy && mm > 2 then 1 else 0 in
-        days'.(mm-1) + dd - 1 + leapday
-
-let days_since_1900 = function Date(yy, mm, dd) as date ->
-        days_since_1900.(yy - 1900) + day_of_year(date)
+let days_in_month year month = 
+    let month' = month-1 (* array is zero-based*) in
+        if is_leapyear year && month = 2 
+        then 29
+        else days.(month') 
 
 (** [is_legal] is true if and only if
     - a date is legal 
     - and can be handled by this program *)
 let is_legal = function Date(yy, mm, dd) ->
            1 <= mm && mm <= 12
-    &&  1900 <= yy && yy <= 2099 
+    &&     1 <= yy && yy <= 10000 (* probably larger *)
     &&     1 <= dd && dd <= days_in_month yy mm
+
+(* The following calculations are based on the following book: Nachum
+Dershowitz, Edward M. Reingold: Calendrical calculations (3. ed.).
+Cambridge University Press 2008, ISBN 978-0-521-88540-9, pp. I-XXIX, 1-479,
+Chapter 2, The Gregorian Calendar *)
+
+let epoch = 1
+let days_since_epoch = function Date(yy, mm, dd) ->
+    let y'          = yy - 1 in
+    let correction  = 
+        if mm <= 2                          then 0
+        else if mm > 2 && is_leapyear yy    then -1
+                                            else -2
+    in                                         
+        epoch - 1 + 365*y' + y'/4 - y'/100 + y'/400 + 
+        (367 * mm - 362)/12 + correction + dd
 
 (** The current local date *)
 let now =
@@ -326,7 +290,7 @@ let string_of_date = function Date(yy, mm, dd) ->
     Printf.sprintf "%04d-%02d-%02d" yy mm dd
     
 (** Difference between two dates in days *)
-let diff d1 d2 = (days_since_1900 d1) - (days_since_1900 d2)
+let diff d1 d2 = (days_since_epoch d1) - (days_since_epoch d2)
 
 let print d1 d2 =
     Printf.printf "%s - %s = %+4d\n" 
