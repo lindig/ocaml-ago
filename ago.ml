@@ -280,10 +280,12 @@ let now =
     - the date is possibly legal can't be handled *)
 let date_from_string str =
     let (yy, mm, dd) = 
-        try Agolex.from_string str 
-        with Agolex.Error msg -> error "Format error: %s" msg in
+        try Agolex.from_string str with 
+        | Agolex.Error msg -> error "Format error: %s" msg in
     let d = Date(yy, mm, dd) in
-        if is_legal d then d else error "not a legal date: %s" str
+        if is_legal d 
+        then d 
+        else error "not a legal date: %s" str
 
 (** [string_of_date] returns a string representation for a date *)
 let string_of_date = function Date(yy, mm, dd) ->  
@@ -328,6 +330,7 @@ let usage this io =
     ; "dd.mm.yyyy"
     ; "today" 
     ; "now"
+    ; "epoch"
     ]
 
 (** [main] handldes command line arguments. *)
