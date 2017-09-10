@@ -57,7 +57,7 @@ messages are emitted to standard error.
 
 The date must range between 0001-01-01 and 9999-12-31. The Gregorian
 calendar was introduced 1582 and hence dates prior to its introduction are
-are an extrapolation.
+an extrapolation.
 
 =head1 SEE ALSO
 

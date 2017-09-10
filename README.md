@@ -24,11 +24,10 @@ this repository.
 
 # Building
 
-Ago is implemented in  OCaml. It does not rely on libraries outside
+Ago is implemented in OCaml. It does not rely on libraries outside
 of the standard library and was developed with OCaml 4.02.1.
 
-    make
-    make PREFIX=/usr/local install
+    jbuilder build
 
 # Documentation
 
