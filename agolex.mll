@@ -11,7 +11,7 @@
     let error fmt = Printf.kprintf (fun msg -> raise (Error msg)) fmt
 
     let get     = Lexing.lexeme
-    let int_of str = 
+    let int_of str =
         try int_of_string str
         with Failure _ -> error "not an integer: %s" str
 
@@ -30,9 +30,9 @@ let month   = ['0'-'1']? digit
 let year    = digit digit digit digit
 
 rule date = parse
-    
-    (year   as yy) '-' 
-    (month2 as mm) '-' 
+
+    (year   as yy) '-'
+    (month2 as mm) '-'
     (day2   as dd) eof      { (int_of yy, int_of mm, int_of dd) }
 
 |   (day    as dd) '.'
@@ -46,7 +46,7 @@ rule date = parse
 {
 let from_string str =
     try
-        Lexing.from_string str |> date 
+        Lexing.from_string str |> date
     with
         Failure _ -> error "not a yyyy-mm-dd date: %s" str
 }
