@@ -21,14 +21,4 @@
   (action
    (run ${<} -test))))
 
-(rule
- ((targets
-   (ago.1))
-  (deps
-   (ago.pod))
-  (action
-   (run
-    ${bin:sh}
-    -c
-    "pod2man -s 1 -r Alpha -c opam.ocaml.org ago.pod > ago.1"))))
 
