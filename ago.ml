@@ -228,6 +228,7 @@ let testcases = [
   ("2053-07-10", "2010-11-15", -15578);
   ("1982-01-22", "1955-02-23", -9830);
 ]
+
 (** days in a month (0 .. 11) when not in a leap year, month is 0-based *)
 let days   = [| 31; 28; 31; 30;  31;  30;  31;  31;  30;  31;  30;  31|]
 
@@ -352,4 +353,3 @@ let () = if not !Sys.interactive then
       main ();
       exit 0
     end
-
