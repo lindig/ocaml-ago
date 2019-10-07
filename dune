@@ -1,0 +1,17 @@
+(executable
+ (name ago)
+ (public_name ago)
+ (libraries unix))
+
+(ocamllex agolex)
+
+(install
+ (section man)
+ (files ago.1))
+
+(alias
+ (name runtest)
+ (deps
+  (:< ago.exe))
+ (action
+  (run %{<} -test)))

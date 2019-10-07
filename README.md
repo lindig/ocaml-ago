@@ -27,7 +27,7 @@ this repository.
 Ago is implemented in OCaml. It does not rely on libraries outside
 of the standard library and was developed with OCaml 4.02.1.
 
-    jbuilder build
+    dune build
 
 # Documentation
 
