@@ -11,7 +11,7 @@ all:
 	$(DUNE) build
 
 install: all
-	$(DUNE) install hello
+	$(DUNE) install ago
 
 uninstall:
 	$(DUNE) uninstall
