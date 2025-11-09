@@ -20,7 +20,7 @@
 
 exception Error of string
 
-let error fmt = Printf.kprintf (fun msg -> raise (Error msg)) fmt
+let error fmt = Printf.ksprintf (fun msg -> raise (Error msg)) fmt
 
 (** Date in year, month 1..12, day 1..31 *)
 type date = Date of int * int * int  (** use [is_legal] for invariants *)
